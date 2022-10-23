@@ -37,12 +37,8 @@ def VersionedFastAPI(
         title=app.title,
         **kwargs,
     )
-    version_route_mapping: Dict[Tuple[int, int], List[APIRoute]] = defaultdict(
-        list
-    )
-    version_routes = [
-        version_to_route(route, default_version) for route in app.routes
-    ]
+    version_route_mapping: Dict[Tuple[int, int], List[APIRoute]] = defaultdict(list)
+    version_routes = [version_to_route(route, default_version) for route in app.routes]
 
     for version, route in version_routes:
         version_route_mapping[version].append(route)
@@ -65,9 +61,7 @@ def VersionedFastAPI(
             versioned_app.router.routes.append(route)
         parent_app.mount(prefix, versioned_app)
 
-        @parent_app.get(
-            f"{prefix}/openapi.json", name=semver, tags=["Versions"]
-        )
+        @parent_app.get(f"{prefix}/openapi.json", name=semver, tags=["Versions"])
         @parent_app.get(f"{prefix}/docs", name=semver, tags=["Documentations"])
         def noop() -> None:
             ...

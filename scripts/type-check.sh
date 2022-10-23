@@ -2,6 +2,6 @@
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 cd ..
 
-mypy fastapi_versioning/
+mypy fastapi_versioned/
 mypy tests/
 mypy example/

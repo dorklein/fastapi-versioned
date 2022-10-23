@@ -20,17 +20,10 @@ def test_annotation_app() -> None:
     assert test_client.get("/v1_1/item/1").json()["quantity"] == 5
     complex_quantity = [{"store_id": "1", "quantity": 5}]
 
-    assert (
-        test_client.get("/v1_2/item/1").json()["quantity"] == complex_quantity
-    )
-    assert (
-        test_client.get("/v1_3/item/1").json()["quantity"] == complex_quantity
-    )
+    assert test_client.get("/v1_2/item/1").json()["quantity"] == complex_quantity
+    assert test_client.get("/v1_3/item/1").json()["quantity"] == complex_quantity
 
-    assert (
-        test_client.get("/latest/item/1").json()["quantity"]
-        == complex_quantity
-    )
+    assert test_client.get("/latest/item/1").json()["quantity"] == complex_quantity
 
     item = {
         "id": "1",
