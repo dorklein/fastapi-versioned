@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fastapi-versioned"
-version = "0.2.0"
+version = "0.2.1"
 description = "api versioning for fastapi web applications"
 authors = ["dorklein <dorklein2@gmail.com>"]
 license = "MIT"
