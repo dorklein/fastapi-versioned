@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from fastapi_versioning import VersionedFastAPI, version
+from fastapi_versioned import VersionedFastAPI, version
 
 app = FastAPI(title="My Online Store")
 

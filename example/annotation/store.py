@@ -5,7 +5,7 @@ from fastapi.routing import APIRouter
 from pydantic import BaseModel
 from typing_extensions import Literal
 
-from fastapi_versioning import version
+from fastapi_versioned import version
 
 router = APIRouter()
 

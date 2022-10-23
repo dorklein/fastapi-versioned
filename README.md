@@ -6,9 +6,10 @@ api versioning for fastapi web applications
 `pip install fastapi-versioning`
 
 ## Examples
+
 ```python
 from fastapi import FastAPI
-from fastapi_versioning import VersionedFastAPI, version
+from fastapi_versioned import VersionedFastAPI, version
 
 app = FastAPI(title="My App")
 
@@ -67,25 +68,29 @@ pipenv run uvicorn example.annotation.app:app
 ```
 
 ## Usage without minor version
+
 ```python
 from fastapi import FastAPI
-from fastapi_versioning import VersionedFastAPI, version
+from fastapi_versioned import VersionedFastAPI, version
 
 app = FastAPI(title='My App')
+
 
 @app.get('/greet')
 @version(1)
 def greet():
-  return 'Hello'
+    return 'Hello'
+
 
 @app.get('/greet')
 @version(2)
 def greet():
-  return 'Hi'
+    return 'Hi'
+
 
 app = VersionedFastAPI(app,
-    version_format='{major}',
-    prefix_format='/v{major}')
+                       version_format='{major}',
+                       prefix_format='/v{major}')
 ```
 
 this will generate two endpoints:
@@ -111,7 +116,7 @@ call, as in the example below
 
 ```python
 from fastapi import FastAPI, Request
-from fastapi_versioning import VersionedFastAPI, version
+from fastapi_versioned import VersionedFastAPI, version
 from starlette.middleware import Middleware
 from starlette.middleware.sessions import SessionMiddleware
 
@@ -123,11 +128,13 @@ app = FastAPI(
     ]
 )
 
+
 @app.get('/greet')
 @version(1)
 def greet(request: Request):
     request.session['last_version_used'] = 1
     return 'Hello'
+
 
 @app.get('/greet')
 @version(2)
@@ -135,16 +142,18 @@ def greet(request: Request):
     request.session['last_version_used'] = 2
     return 'Hi'
 
+
 @app.get('/version')
 def last_version(request: Request):
     return f'Your last greeting was sent from version {request.session["last_version_used"]}'
 
+
 app = VersionedFastAPI(app,
-    version_format='{major}',
-    prefix_format='/v{major}',
-    description='Greet users with a nice message',
-    middleware=[
-        Middleware(SessionMiddleware, secret_key='mysecretkey')
-    ]
-)
+                       version_format='{major}',
+                       prefix_format='/v{major}',
+                       description='Greet users with a nice message',
+                       middleware=[
+                           Middleware(SessionMiddleware, secret_key='mysecretkey')
+                       ]
+                       )
 ```

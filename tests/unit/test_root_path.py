@@ -3,7 +3,7 @@ from typing import Any, Dict
 from fastapi import FastAPI, Request
 from starlette.testclient import TestClient
 
-from fastapi_versioning import VersionedFastAPI
+from fastapi_versioned import VersionedFastAPI
 
 
 def test_root_path() -> None:
