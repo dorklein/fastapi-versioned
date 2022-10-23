@@ -91,7 +91,7 @@ def test_websocket_support() -> None:
         assert test_client.get("/v1_0/docs").status_code == 200
 
         with pytest.raises(WebSocketDisconnect):
-            with test_client.websocket_connect("/ws") as ws:
+            with test_client.websocket_connect("/ws"):
                 ...
 
         with test_client.websocket_connect("/v1_0/ws") as websocket:
