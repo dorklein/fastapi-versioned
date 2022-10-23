@@ -1,5 +1,6 @@
 # fastapi-versioning
-api versioning for fastapi web applications
+Api versioning for fastapi web applications
+with support for websockets.
 
 # Installation
 
