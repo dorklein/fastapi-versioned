@@ -76,8 +76,8 @@ jobs:
       #----------------------------------------------
       - name: Run linting
         run: |
-          ./lint.sh
-          ./type-check.sh
+          ./scripts/lint.sh
+          ./scripts/type-check.sh
 
       #----------------------------------------------
       #              run test suite
