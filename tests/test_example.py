@@ -1,8 +1,11 @@
+import pytest
 from starlette.testclient import TestClient
+from starlette.websockets import WebSocketDisconnect
 
 from example.annotation.app import app as annotation_app
 from example.custom_default_version.app import app as default_version_app
 from example.router.app import app as router_app
+from example.ws_app.app import app as ws_app
 
 
 def test_annotation_app() -> None:
@@ -80,3 +83,18 @@ def test_default_version() -> None:
 
     assert test_client.get("/v2_0/").json() == "Hello default version 2.0!"
     assert test_client.get("/v3_0/").json() == "Hello version 3.0!"
+
+
+def test_websocket_support() -> None:
+    with TestClient(ws_app) as test_client:
+        assert test_client.get("/docs").status_code == 200
+        assert test_client.get("/v1_0/docs").status_code == 200
+
+        with pytest.raises(WebSocketDisconnect):
+            test_client.websocket_connect("/ws")
+
+        with test_client.websocket_connect("/v1_0/ws") as websocket:
+            websocket.send_json({"msg": "Hello WebSocket"})
+            data = websocket.receive_text()
+            assert data == 'Message text was: {"msg": "Hello WebSocket"}'
+            websocket.close()

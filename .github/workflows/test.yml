@@ -74,8 +74,10 @@ jobs:
       #----------------------------------------------
       #              linting
       #----------------------------------------------
-      - name: Run tests
-        run: ./scripts/static-analysis.sh
+      - name: Run linting
+        run: |
+          ./lint.sh
+          ./type-check.sh
 
       #----------------------------------------------
       #              run test suite

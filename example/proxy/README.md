@@ -6,6 +6,12 @@ run:
 traefik --configFile=traefik.toml
 ```
 
+or with Dokcer
+```sh
+docker run -d -p 8080:8080 -p 80:80 \
+    -v $PWD/traefik.yml:/etc/traefik/traefik.yml traefik:v2.9
+```
+
 then in another shell run:
 ```sh
 uvicorn app:app
