@@ -76,6 +76,7 @@ jobs:
       #----------------------------------------------
       - name: Run linting
         run: |
+          source .venv/bin/activate
           ./scripts/lint.sh
           ./scripts/type-check.sh
 
