@@ -2,6 +2,10 @@
 Api versioning for fastapi web applications
 with support for websockets.
 
+## Supports
+- REST api
+- Webockets
+
 # Installation
 
 `pip install fastapi-versioning`
