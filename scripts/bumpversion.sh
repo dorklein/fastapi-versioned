@@ -5,8 +5,8 @@ cd ..
 VERSION_RULE=${1:?"Usage: ./scripts/bumpversion.sh <version rule>"}
 
 git fetch origin
-git checkout -B master
-git reset --soft origin/master
+git checkout -B main
+git reset --soft origin/main
 POETRY_OUTPUT=$(poetry version "$VERSION_RULE" 2>&1)
 NEW_VERSION=$( perl -ne 'if (/Bumping version from \d+\.\d+\.\d+ to (\d+\.\d+\.\d+)/) { print $1 . "\n" }' <<< "$POETRY_OUTPUT" )
 git commit ./pyproject.toml -m "Bumped version to $NEW_VERSION"
